@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Library</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <header>
+        <div class="leftheader">
+            <div class="title">Library</div>
+            <div class="libLogo"><img src="./images/bookshelf.svg" width="35px" height="35px" alt="Library icon"></div>
+        </div>
+        <button id="loginBtn">Log In</button>
+    </header>
+    <main>
+        <div class="mainbtn">
+            <button id="addBtn">+ Add Book</button>
+        </div>
+        <div class="cardGrid" id="card-grid"></div>
+        <div class="modal" id="addBookModal">
+            <form id="addBookForm">
+                <div class="modalIntro">
+                    <h3>Add New Book</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <input type="text" name="titlebook" id="titlebook" placeholder="Title...">
+                <input type="text" name="author" id="author" placeholder="Author...">
+                <input type="number" name="pages" id="pages" placeholder="Pages...">
+                <div class="readCheck">
+                    <label class="haveRead" for="readBook">Did you finish reading it?</label>
+                    <input class="checkBox" type="checkbox" id="readBook">
+                </div>
+                <button type="submit" id="submitBtn">Submit</button>
+            </form>
+        </div>
+        <div class="overlay" id="overlay"></div>
+    </main>
+    <footer>
+        <div class="footerCredit">Designed by Falteringsky</div>
+    </footer>
+
+    <script src="./main.js"></script>
+</body>
+</html>
