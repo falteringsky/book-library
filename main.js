@@ -9,26 +9,70 @@ const pagesBook = document.getElementById('pages');
 /* Main div holding all books*/
 const books = document.getElementById('card-grid');
 
+  class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+}
+
+function addBookToLibrary(title, author, pages, read) {
+  myLibrary.push(new Book(title, author, pages, read));
+  saveAndRenderBooks();
+}
+
+bookForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+  // returns object
+  const data = new FormData(e.target);
+  let newBook = {}
+
+  //grab name and value pair off object newBook
+  for(let [name, value] of data) {
+    if (name === 'readBook') {
+      newBook['readBook'] = true
+    }
+    else {
+      newBook[name] = value || ''
+    }
+  }
+
+  //if we dont have newbook read, then mark as false
+  if (!newBook['readBook']) {
+    newBook['readBook'] = false
+  }
+
+  if (document.querySelector('.form-title').textContent === 'Edit Book') {
+    let id = e.target.id;
+    let editBook = myLibrary.filter(book => book.id === id)[0]
+    editBook.title = newBook['titlebook']
+    editBook.author = newBook['author']
+    editBook.pages = newBook['pages']
+    editBook.read = newBook['readBook']
+    saveAndRenderBooks()
+  }
+  
+  else {
+  addBookToLibrary(
+    newBook['titlebook'],
+    newBook['author'],
+    newBook['pages'],
+    newBook['readBook']
+  )}
+
+  bookForm.reset();
+  modal.style.display = 'none';
+  overlay.style.display = 'none';
+})
+
 //array of books
 let myLibrary = [];
 
 // local storage => saves value in key pairs
 function addLocalStorage() {
-  // localStorage.setItem('library', JSON.stringify([
-  //   {
-  //     title:'book 1',
-  //     author: 'john doe',
-  //     pages: '1',
-  //     read: 'true'
-  //   },
-  //   {
-  //     title:'book 2',
-  //     author: 'Kio doe',
-  //     pages: '4',
-  //     read: 'false'
-  //   },
-  // ])
-  // );
   myLibrary = JSON.parse(localStorage.getItem('library')) || [];
   saveAndRenderBooks();
 }
@@ -69,13 +113,26 @@ function createReadELement(bookItem, book) {
   return read;
 }
 
+function fillOUtEditForm(book) {
+  modal.classList.add('active');
+  overlay.classList.add('active');
+  document.querySelector('.form-title').textContent = 'Edit Book';
+  document.querySelector('#submitBtn').textContent = 'Edit';
+
+  document.querySelector('#addBookForm').setAttribute('id', book.id);
+  document.querySelector('#titlebook').value = book.title || '';
+  document.querySelector('#author').value = book.author || '';
+  document.querySelector('#pages').value = book.pages || '';
+  document.querySelector('#readBook').checked = book.read;
+}
+
 //create the edit button with event listener
 function createEditIcons(book) {
   const editIcon = document.createElement('img');
   editIcon.src = './images/grease-pencil.svg';
   editIcon.setAttribute('class', 'edit-icon');
   editIcon.addEventListener('click', (e) => {
-    console.log(book);
+    fillOUtEditForm()
   })
   return editIcon;
 }
@@ -132,18 +189,6 @@ function saveAndRenderBooks() {
 //render books on page loading
 addLocalStorage();
 
-//Book class: represents book
-
- /*class Book {
-  constructor(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  }
-}
-*/
-
 
 
 
@@ -152,6 +197,8 @@ const openBookModal = () => {
     bookForm.reset();
     modal.classList.add('active');
     overlay.classList.add('active');
+    document.querySelector('.form-title').textContent = 'Add New Book';
+    document.querySelector('#submitBtn').textContent = 'Submit';
   }
   
 const closeBookModal = () => {
@@ -167,43 +214,7 @@ addBtn.onclick = openBookModal;
 // When the user clicks on <span> (x), close the modal
 spanClose.onclick = closeBookModal;
   
-  // When the user clicks anywhere outside of the modal, close it
-  overlay.onclick = closeBookModal
+// When the user clicks anywhere outside of the modal, close it
+overlay.onclick = closeBookModal
 
 
-
-
-  //UI class: handles UI elements
-
-/* class UI {
-  static displayBooks() {
-    const storedBooks = [
-      {
-        title:'book 1',
-        author: 'john doe',
-        pages: '1',
-        read: 'true'
-      },
-      {
-        title:'book 2',
-        author: 'Kio doe',
-        pages: '4',
-        read: 'false'
-      }
-    ];
-
-    const books = storedBooks;
-
-    books.forEach((book) => UI.addBookToList(book));
-  }
-
-  static addBookToList(book) {
-    const list = document.getElementById('card-grid');
-
-    
-  }
-}
-function addBookToLibrary {
-
-}
-*/
