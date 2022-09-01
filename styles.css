@@ -100,7 +100,7 @@ main {
     display: block;
 }
 
-#addBookForm {
+.addBookForm {
   background-color: whitesmoke;
   display: flex;
   flex-direction: column;
@@ -194,4 +194,8 @@ input {
 .edit-icon, .icons {
   width: 25px;
   height: 25px;
+}
+
+.edit-icon {
+  cursor: pointer;
 }
