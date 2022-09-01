@@ -64,11 +64,20 @@ main, footer {
     background-color: aliceblue;
 }
 
-.cardGrid {
-  display: grid;
+#card-grid {
+  /* display: grid;
   grid-template-columns: repeat(autofill, minmax(300px, 1fr));
   gap: 20px;
-  margin-top: 40px;
+  margin-top: 40px; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 1;
+  max-width: 1000;
+  position: absolute;
+  top: 20%;
+  left: 15%;
+  margin: 2rem;
 }
 
 main {
@@ -198,4 +207,16 @@ input {
 
 .edit-icon {
   cursor: pointer;
+}
+
+.card.book {
+  width: 250px;
+  height: 300px;
+  border-radius: 5px;
+  margin: 2rem 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  transition: 0.5s ease;
+  background: white;
 }
