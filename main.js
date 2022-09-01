@@ -9,7 +9,7 @@ const pagesBook = document.getElementById('pages');
 /* Main div holding all books*/
 const books = document.getElementById('card-grid');
 
-// When the user clicks on the button, open the modal
+// Open the modal
 const openBookModal = () => {
     bookForm.reset();
     modal.classList.add('active');
@@ -17,16 +17,15 @@ const openBookModal = () => {
     document.querySelector('.form-title').textContent = 'Add New Book';
     document.querySelector('#submitBtn').textContent = 'Submit';
   }
-  
+
+// Close book modal
 const closeBookModal = () => {
     modal.classList.remove('active');
     overlay.classList.remove('active');
-    // errorMsg.classList.remove('active')
-    // errorMsg.textContent = ''
   }
 
+//When the user clicks on add book, open the modal
 addBtn.onclick = openBookModal;
-
 
 // When the user clicks on <span> (x), close the modal
 spanClose.onclick = closeBookModal;
@@ -34,7 +33,7 @@ spanClose.onclick = closeBookModal;
 // When the user clicks anywhere outside of the modal, close it
 overlay.onclick = closeBookModal
 
-
+//this value received through arguments is passed in object and generate random number to set as id
   function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -43,12 +42,13 @@ overlay.onclick = closeBookModal
     this.id = Math.floor(Math.random() * 1000000);
   }
 
-
+//push arguments received of book into new object and save books into local
 function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(new Book(title, author, pages, read));
   saveAndRenderBooks();
 }
 
+//pressing button on form will...
 bookForm.addEventListener('submit', (e) => {
   e.preventDefault()
 
@@ -71,8 +71,10 @@ bookForm.addEventListener('submit', (e) => {
     newBook['readBook'] = false
   }
 
+  //if title edit, then pass new inputs into edited book info and save
   if (document.querySelector('.form-title').textContent == 'Edit Book') {
     let id = e.target.id;
+    //gives us an array with a matching id and grab first object
     let editBook = myLibrary.filter((book) => book.id == id)[0];
     editBook.title = newBook['titlebook'];
     editBook.author = newBook['author'];
@@ -139,6 +141,7 @@ function createReadElement(bookItem, book) {
   return read;
 }
 
+//get values of input in edit form 
 function fillOutEditForm(book) {
   modal.classList.add('active');
   overlay.classList.add('active');
@@ -173,6 +176,7 @@ function createIcons() {
   return div;
 }
 
+//delete book
 function deleteBook(index) {
   myLibrary.splice(index, 1);
   saveAndRenderBooks();
@@ -207,6 +211,7 @@ function renderBooks() {
   });
 };
 
+//save books to local storage
 function saveAndRenderBooks() {
   localStorage.setItem('library', JSON.stringify(myLibrary));
   renderBooks();
