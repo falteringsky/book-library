@@ -66,7 +66,7 @@ bookForm.addEventListener('submit', (e) => {
     }
   }
 
-  //if we dont have newbook read, then mark as false
+  //if there is no readBook, mark readBook in object as false
   if (!newBook['readBook']) {
     newBook['readBook'] = false
   }
@@ -119,15 +119,16 @@ function createReadElement(bookItem, book) {
   read.setAttribute('class', 'book-read');
   read.appendChild(createBookElement('h1', 'Read?', 'book-read-title'));
   let input = document.createElement('input');
+  input.setAttribute('class', 'checkBox')
   input.type = 'checkbox';
   input.addEventListener('click', (e) => {
     if(e.target.checked) {
-      bookItem.setAttribute('class', 'card-book read-checked');
+      bookItem.setAttribute('class', 'card book read-checked');
       book.read = true;
       saveAndRenderBooks();
     }
     else {
-      bookItem.setAttribute('class', 'card-book read-unchecked');
+      bookItem.setAttribute('class', 'card book read-unchecked');
       book.read = false;
       saveAndRenderBooks();
     }
@@ -135,7 +136,7 @@ function createReadElement(bookItem, book) {
 
   if(book.read) {
     input.checked = true;
-    bookItem.setAttribute('class', 'card-book read-checked');
+    bookItem.setAttribute('class', 'card book read-checked');
   }
   read.appendChild(input);
   return read;
@@ -188,13 +189,16 @@ function createBookItem(book, index) {
   bookItem.setAttribute('id', index);
   bookItem.setAttribute('key', index);
   bookItem.setAttribute('class', 'card book');
+  const editDeleteIcon = document.createElement('div');
+  editDeleteIcon.setAttribute('class', 'edit-delete-icon');
+  bookItem.appendChild(editDeleteIcon);
+  editDeleteIcon.appendChild(createEditIcons(book));
+  editDeleteIcon.appendChild(createBookElement('button', 'X', 'delete'));
   bookItem.appendChild(createBookElement('h1', `Title: ${book.title}`, 'book-title'));
   bookItem.appendChild(createBookElement('h1', `Author: ${book.author}`, 'book-author'));
   bookItem.appendChild(createBookElement('h1', `Pages: ${book.pages}`, 'book-pages'));
   bookItem.appendChild(createReadElement(bookItem, book));
-  bookItem.appendChild(createBookElement('button', 'X', 'delete'));
   bookItem.appendChild(createIcons());
-  bookItem.appendChild(createEditIcons(book));
 
   bookItem.querySelector('.delete').addEventListener('click', () => {
     deleteBook(index);
