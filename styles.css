@@ -1,11 +1,11 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background-color:;
+  background-color: ;
 }
 
 h3 {
@@ -18,13 +18,13 @@ button {
 }
 
 header {
-    background-color: white;
-    padding: 20px;
-    display: flex;
-    max-width: 1200px;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  max-width: 1200px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
 }
 
 .leftheader {
@@ -51,17 +51,18 @@ header {
   background-color: aliceblue;
 }
 
-main, footer {
-    background-color: lightgray;
+main,
+footer {
+  background-color: lightgray;
 }
 
 #addBtn {
-    border: 1px solid black;
-    border-radius: 8px;
-    padding: 10px 15px;
-    font-size: 1.8rem;
-    font-weight: 600;
-    background-color: aliceblue;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  background-color: aliceblue;
 }
 
 #card-grid {
@@ -84,7 +85,7 @@ main, footer {
 .card.book {
   width: 250px;
   height: 250px;
-  border-radius:5px;
+  border-radius: 5px;
   margin: 5px 20px;
   padding: 5px 20px;
   display: flex;
@@ -92,7 +93,7 @@ main, footer {
   flex-direction: column;
   transition: 0.5s ease;
   border-left: 10px solid rgb(180, 1, 1) !important;
-  background-color: #D2ECFA !important;
+  background-color: #d2ecfa !important;
 }
 
 .read-checked.card.book {
@@ -113,25 +114,25 @@ main {
 }
 
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 50%;
-    top: 50%;
-    width: 300px; /* width */
-    overflow: auto; /* Enable scroll if needed */
-    padding: 20px;
-    text-align: center;
-    border-radius: 8px;
-    transform: translate(-50%, -50%) scale(0);
-    transition: 0.2s ease-in-out;
-    background-color: whitesmoke;
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 50%;
+  top: 50%;
+  width: 300px; /* width */
+  overflow: auto; /* Enable scroll if needed */
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 0.2s ease-in-out;
+  background-color: whitesmoke;
 }
 
 .modal.active {
-    transform: translate(-50%, -50%) scale(1);
-    display: block;
+  transform: translate(-50%, -50%) scale(1);
+  display: block;
 }
 
 .addBookForm {
@@ -160,8 +161,38 @@ main {
 
 input {
   padding: 10px;
-  border: none;
+  border: 2px solid black;
   border-radius: 8px;
+}
+
+input:invalid,
+input:focus:invalid {
+  border-color: red;
+}
+
+input:focus:invalid {
+  outline: none;
+}
+
+input:valid {
+  border-color: lightgreen;
+}
+
+.error {
+  display: block;
+  width: 100%;
+  padding: 0;
+
+  font-size: 15px;
+  color: white;
+  background-color: red;
+  border-radius: 0 0 5px 5px;
+
+  box-sizing: border-box;
+}
+
+.error.active {
+  padding: 0.3em;
 }
 
 .checkBox {
@@ -181,7 +212,6 @@ input {
   font-size: 1.2rem;
 }
 
-
 .overlay {
   position: fixed;
   top: 0;
@@ -193,39 +223,40 @@ input {
 }
 
 .overlay.active {
-    display: block;
+  display: block;
 }
-  
-  /* The Close Button */
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
 
-  footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 10px;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: 500;
-    font-style: italic;
-  }
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
 
-  /*icon edits*/
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
 
-.edit-icon, .icons {
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-style: italic;
+}
+
+/*icon edits*/
+
+.edit-icon,
+.icons {
   width: 25px;
   height: 25px;
 }
